@@ -6,11 +6,13 @@ dependencies:
     - field.field.node.booking.body
     - field.field.node.booking.field_arrival_time
     - field.field.node.booking.field_audience_size
+    - field.field.node.booking.field_band_size
     - field.field.node.booking.field_booking_agent
     - field.field.node.booking.field_booking_status
     - field.field.node.booking.field_client_name
     - field.field.node.booking.field_conversation
     - field.field.node.booking.field_date
+    - field.field.node.booking.field_dietary_requirements
     - field.field.node.booking.field_enquiry_date
     - field.field.node.booking.field_enquiry_source
     - field.field.node.booking.field_event_type
@@ -25,8 +27,10 @@ dependencies:
     - field.field.node.booking.field_musician_vocals
     - field.field.node.booking.field_pa
     - field.field.node.booking.field_playlists
+    - field.field.node.booking.field_rider
     - field.field.node.booking.field_setup_time
     - field.field.node.booking.field_show
+    - field.field.node.booking.field_show_length
     - field.field.node.booking.field_song_requests
     - field.field.node.booking.field_start_time
     - field.field.node.booking.field_venue_name
@@ -51,6 +55,7 @@ third_party_settings:
         - group_venue
         - group_invoice
         - group_band
+        - group_rider
         - group_requests
         - group_playlists
         - group_conversation
@@ -72,7 +77,7 @@ third_party_settings:
       label: Client
       region: content
       parent_name: group_booking
-      weight: 14
+      weight: 16
       format_type: tab
       format_settings:
         classes: ''
@@ -88,7 +93,7 @@ third_party_settings:
       label: Venue
       region: content
       parent_name: group_booking
-      weight: 15
+      weight: 17
       format_type: tab
       format_settings:
         classes: ''
@@ -104,7 +109,7 @@ third_party_settings:
       label: Invoice
       region: content
       parent_name: group_booking
-      weight: 16
+      weight: 18
       format_type: tab
       format_settings:
         classes: ''
@@ -119,6 +124,7 @@ third_party_settings:
         - field_show
         - field_date
         - field_event_type
+        - field_show_length
         - field_arrival_time
         - field_setup_time
         - field_start_time
@@ -129,7 +135,7 @@ third_party_settings:
       label: Show
       region: content
       parent_name: group_booking
-      weight: 13
+      weight: 15
       format_type: tab
       format_settings:
         classes: ''
@@ -144,9 +150,9 @@ third_party_settings:
         - field_enquiry_source
         - field_enquiry_date
       label: Enquiry
-      region: hidden
+      region: content
       parent_name: group_booking
-      weight: 12
+      weight: 14
       format_type: tab
       format_settings:
         classes: ''
@@ -162,7 +168,7 @@ third_party_settings:
       label: Conversation
       region: content
       parent_name: group_booking
-      weight: 20
+      weight: 23
       format_type: tab
       format_settings:
         classes: ''
@@ -174,6 +180,7 @@ third_party_settings:
         required_fields: true
     group_band:
       children:
+        - field_band_size
         - field_musician_vocals
         - field_musician_drums
         - field_musician_bass
@@ -184,7 +191,7 @@ third_party_settings:
       label: Band
       region: content
       parent_name: group_booking
-      weight: 17
+      weight: 19
       format_type: tab
       format_settings:
         classes: ''
@@ -200,7 +207,7 @@ third_party_settings:
       label: Requests
       region: content
       parent_name: group_booking
-      weight: 18
+      weight: 21
       format_type: tab
       format_settings:
         classes: ''
@@ -214,9 +221,26 @@ third_party_settings:
       children:
         - field_playlists
       label: Playlists
-      region: hidden
+      region: content
       parent_name: group_booking
-      weight: 19
+      weight: 22
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_rider:
+      children:
+        - field_rider
+        - field_dietary_requirements
+      label: Rider
+      region: content
+      parent_name: group_booking
+      weight: 20
       format_type: tab
       format_settings:
         classes: ''
@@ -252,6 +276,12 @@ content:
   field_audience_size:
     type: options_select
     weight: 18
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_band_size:
+    type: options_select
+    weight: 22
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -306,6 +336,12 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_dietary_requirements:
+    type: options_buttons
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_enquiry_date:
     type: datetime_default
     weight: 6
@@ -320,7 +356,7 @@ content:
     third_party_settings: {  }
   field_event_type:
     type: options_select
-    weight: 13
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -334,7 +370,7 @@ content:
     third_party_settings: {  }
   field_invoice_name:
     type: entity_reference_modal
-    weight: 6
+    weight: 23
     region: content
     settings:
       view_and_display: 'contact_lookup:entity_reference_1'
@@ -353,43 +389,43 @@ content:
     third_party_settings: {  }
   field_musician_bass:
     type: options_select
-    weight: 21
+    weight: 25
     region: content
     settings: {  }
     third_party_settings: {  }
   field_musician_dj:
     type: options_select
-    weight: 25
+    weight: 30
     region: content
     settings: {  }
     third_party_settings: {  }
   field_musician_drums:
     type: options_select
-    weight: 20
+    weight: 24
     region: content
     settings: {  }
     third_party_settings: {  }
   field_musician_guitar:
     type: options_select
-    weight: 22
+    weight: 27
     region: content
     settings: {  }
     third_party_settings: {  }
   field_musician_keyboards:
     type: options_select
-    weight: 23
+    weight: 28
     region: content
     settings: {  }
     third_party_settings: {  }
   field_musician_sound:
     type: options_select
-    weight: 24
+    weight: 29
     region: content
     settings: {  }
     third_party_settings: {  }
   field_musician_vocals:
     type: options_select
-    weight: 19
+    weight: 23
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -417,6 +453,14 @@ content:
         collapse_edit_all: collapse_edit_all
         duplicate: duplicate
     third_party_settings: {  }
+  field_rider:
+    type: string_textarea
+    weight: 6
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
   field_setup_time:
     type: time_widget
     weight: 15
@@ -438,9 +482,15 @@ content:
       required_depth: 0
       none_label: '- Please select -'
     third_party_settings: {  }
+  field_show_length:
+    type: options_select
+    weight: 13
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_song_requests:
     type: paragraphs
-    weight: 6
+    weight: 23
     region: content
     settings:
       title: Paragraph

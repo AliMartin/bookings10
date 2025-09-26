@@ -6,11 +6,13 @@ dependencies:
     - field.field.node.booking.body
     - field.field.node.booking.field_arrival_time
     - field.field.node.booking.field_audience_size
+    - field.field.node.booking.field_band_size
     - field.field.node.booking.field_booking_agent
     - field.field.node.booking.field_booking_status
     - field.field.node.booking.field_client_name
     - field.field.node.booking.field_conversation
     - field.field.node.booking.field_date
+    - field.field.node.booking.field_dietary_requirements
     - field.field.node.booking.field_enquiry_date
     - field.field.node.booking.field_enquiry_source
     - field.field.node.booking.field_event_type
@@ -25,8 +27,10 @@ dependencies:
     - field.field.node.booking.field_musician_vocals
     - field.field.node.booking.field_pa
     - field.field.node.booking.field_playlists
+    - field.field.node.booking.field_rider
     - field.field.node.booking.field_setup_time
     - field.field.node.booking.field_show
+    - field.field.node.booking.field_show_length
     - field.field.node.booking.field_song_requests
     - field.field.node.booking.field_start_time
     - field.field.node.booking.field_venue_name
@@ -70,6 +74,14 @@ content:
     third_party_settings: {  }
     weight: 20
     region: content
+  field_band_size:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 30
+    region: content
   field_booking_agent:
     type: entity_reference_label
     label: above
@@ -111,6 +123,14 @@ content:
       format_type: time
     third_party_settings: {  }
     weight: 5
+    region: content
+  field_dietary_requirements:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 33
     region: content
   field_enquiry_date:
     type: datetime_default
@@ -226,6 +246,13 @@ content:
     third_party_settings: {  }
     weight: 29
     region: content
+  field_rider:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 32
+    region: content
   field_setup_time:
     type: time_formatter
     label: above
@@ -241,6 +268,14 @@ content:
       link: true
     third_party_settings: {  }
     weight: 14
+    region: content
+  field_show_length:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 31
     region: content
   field_song_requests:
     type: entity_reference_revisions_entity_view

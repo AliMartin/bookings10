@@ -7,11 +7,13 @@ dependencies:
     - field.field.node.booking.body
     - field.field.node.booking.field_arrival_time
     - field.field.node.booking.field_audience_size
+    - field.field.node.booking.field_band_size
     - field.field.node.booking.field_booking_agent
     - field.field.node.booking.field_booking_status
     - field.field.node.booking.field_client_name
     - field.field.node.booking.field_conversation
     - field.field.node.booking.field_date
+    - field.field.node.booking.field_dietary_requirements
     - field.field.node.booking.field_enquiry_date
     - field.field.node.booking.field_enquiry_source
     - field.field.node.booking.field_event_type
@@ -26,8 +28,10 @@ dependencies:
     - field.field.node.booking.field_musician_vocals
     - field.field.node.booking.field_pa
     - field.field.node.booking.field_playlists
+    - field.field.node.booking.field_rider
     - field.field.node.booking.field_setup_time
     - field.field.node.booking.field_show
+    - field.field.node.booking.field_show_length
     - field.field.node.booking.field_song_requests
     - field.field.node.booking.field_start_time
     - field.field.node.booking.field_venue_name
@@ -61,11 +65,13 @@ content:
 hidden:
   field_arrival_time: true
   field_audience_size: true
+  field_band_size: true
   field_booking_agent: true
   field_booking_status: true
   field_client_name: true
   field_conversation: true
   field_date: true
+  field_dietary_requirements: true
   field_enquiry_date: true
   field_enquiry_source: true
   field_event_type: true
@@ -80,8 +86,10 @@ hidden:
   field_musician_vocals: true
   field_pa: true
   field_playlists: true
+  field_rider: true
   field_setup_time: true
   field_show: true
+  field_show_length: true
   field_song_requests: true
   field_start_time: true
   field_venue_name: true

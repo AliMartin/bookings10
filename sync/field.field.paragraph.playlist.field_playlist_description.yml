@@ -10,7 +10,7 @@ field_name: field_playlist_description
 entity_type: paragraph
 bundle: playlist
 label: Description
-description: ''
+description: "For example, is this background music to be played when the band isn't playing?"
 required: false
 translatable: false
 default_value: {  }
