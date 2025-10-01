@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.booking.body
+    - field.field.node.booking.field_access_instructions
     - field.field.node.booking.field_arrival_time
     - field.field.node.booking.field_audience_size
     - field.field.node.booking.field_band_size
@@ -13,11 +14,15 @@ dependencies:
     - field.field.node.booking.field_conversation
     - field.field.node.booking.field_date
     - field.field.node.booking.field_dietary_requirements
+    - field.field.node.booking.field_early_arrival
     - field.field.node.booking.field_enquiry_date
     - field.field.node.booking.field_enquiry_source
     - field.field.node.booking.field_event_type
     - field.field.node.booking.field_finish_time
     - field.field.node.booking.field_invoice_name
+    - field.field.node.booking.field_itinerary
+    - field.field.node.booking.field_late_finish
+    - field.field.node.booking.field_manned_dj_service
     - field.field.node.booking.field_musician_bass
     - field.field.node.booking.field_musician_dj
     - field.field.node.booking.field_musician_drums
@@ -26,7 +31,10 @@ dependencies:
     - field.field.node.booking.field_musician_sound
     - field.field.node.booking.field_musician_vocals
     - field.field.node.booking.field_pa
+    - field.field.node.booking.field_payment_history
     - field.field.node.booking.field_playlists
+    - field.field.node.booking.field_quote_amount
+    - field.field.node.booking.field_quote_link
     - field.field.node.booking.field_rider
     - field.field.node.booking.field_setup_time
     - field.field.node.booking.field_show
@@ -38,6 +46,7 @@ dependencies:
   module:
     - datetime
     - entity_reference_revisions
+    - link
     - text
     - time_field
     - user
@@ -57,6 +66,13 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: -20
+    region: content
+  field_access_instructions:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 40
     region: content
   field_arrival_time:
     type: time_formatter
@@ -132,6 +148,16 @@ content:
     third_party_settings: {  }
     weight: 33
     region: content
+  field_early_arrival:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 37
+    region: content
   field_enquiry_date:
     type: datetime_default
     label: above
@@ -172,6 +198,33 @@ content:
       link: true
     third_party_settings: {  }
     weight: 9
+    region: content
+  field_itinerary:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 41
+    region: content
+  field_late_finish:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 38
+    region: content
+  field_manned_dj_service:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 39
     region: content
   field_musician_bass:
     type: entity_reference_label
@@ -237,6 +290,15 @@ content:
     third_party_settings: {  }
     weight: 18
     region: content
+  field_payment_history:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 36
+    region: content
   field_playlists:
     type: entity_reference_revisions_entity_view
     label: above
@@ -246,12 +308,35 @@ content:
     third_party_settings: {  }
     weight: 29
     region: content
+  field_quote_amount:
+    type: number_decimal
+    label: above
+    settings:
+      thousand_separator: ''
+      decimal_separator: .
+      scale: 2
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 35
+    region: content
+  field_quote_link:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 34
+    region: content
   field_rider:
-    type: basic_string
+    type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 32
+    weight: 42
     region: content
   field_setup_time:
     type: time_formatter

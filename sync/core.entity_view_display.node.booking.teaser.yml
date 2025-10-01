@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.booking.body
+    - field.field.node.booking.field_access_instructions
     - field.field.node.booking.field_arrival_time
     - field.field.node.booking.field_audience_size
     - field.field.node.booking.field_band_size
@@ -14,11 +15,15 @@ dependencies:
     - field.field.node.booking.field_conversation
     - field.field.node.booking.field_date
     - field.field.node.booking.field_dietary_requirements
+    - field.field.node.booking.field_early_arrival
     - field.field.node.booking.field_enquiry_date
     - field.field.node.booking.field_enquiry_source
     - field.field.node.booking.field_event_type
     - field.field.node.booking.field_finish_time
     - field.field.node.booking.field_invoice_name
+    - field.field.node.booking.field_itinerary
+    - field.field.node.booking.field_late_finish
+    - field.field.node.booking.field_manned_dj_service
     - field.field.node.booking.field_musician_bass
     - field.field.node.booking.field_musician_dj
     - field.field.node.booking.field_musician_drums
@@ -27,7 +32,10 @@ dependencies:
     - field.field.node.booking.field_musician_sound
     - field.field.node.booking.field_musician_vocals
     - field.field.node.booking.field_pa
+    - field.field.node.booking.field_payment_history
     - field.field.node.booking.field_playlists
+    - field.field.node.booking.field_quote_amount
+    - field.field.node.booking.field_quote_link
     - field.field.node.booking.field_rider
     - field.field.node.booking.field_setup_time
     - field.field.node.booking.field_show
@@ -63,6 +71,7 @@ content:
     weight: 100
     region: content
 hidden:
+  field_access_instructions: true
   field_arrival_time: true
   field_audience_size: true
   field_band_size: true
@@ -72,11 +81,15 @@ hidden:
   field_conversation: true
   field_date: true
   field_dietary_requirements: true
+  field_early_arrival: true
   field_enquiry_date: true
   field_enquiry_source: true
   field_event_type: true
   field_finish_time: true
   field_invoice_name: true
+  field_itinerary: true
+  field_late_finish: true
+  field_manned_dj_service: true
   field_musician_bass: true
   field_musician_dj: true
   field_musician_drums: true
@@ -85,7 +98,10 @@ hidden:
   field_musician_sound: true
   field_musician_vocals: true
   field_pa: true
+  field_payment_history: true
   field_playlists: true
+  field_quote_amount: true
+  field_quote_link: true
   field_rider: true
   field_setup_time: true
   field_show: true

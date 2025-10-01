@@ -1,16 +1,15 @@
-uuid: 64cca144-c4b3-46fc-beef-5ad79dc41b89
+uuid: dc72f162-c698-4c9e-9ed9-89bc4ed67423
 langcode: en-gb
 status: true
 dependencies:
   module:
     - node
-    - text
-id: node.field_rider
-field_name: field_rider
+id: node.field_late_finish
+field_name: field_late_finish
 entity_type: node
-type: text_long
+type: boolean
 settings: {  }
-module: text
+module: core
 locked: false
 cardinality: 1
 translatable: true

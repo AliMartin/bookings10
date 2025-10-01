@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.booking.body
+    - field.field.node.booking.field_access_instructions
     - field.field.node.booking.field_arrival_time
     - field.field.node.booking.field_audience_size
     - field.field.node.booking.field_band_size
@@ -13,11 +14,15 @@ dependencies:
     - field.field.node.booking.field_conversation
     - field.field.node.booking.field_date
     - field.field.node.booking.field_dietary_requirements
+    - field.field.node.booking.field_early_arrival
     - field.field.node.booking.field_enquiry_date
     - field.field.node.booking.field_enquiry_source
     - field.field.node.booking.field_event_type
     - field.field.node.booking.field_finish_time
     - field.field.node.booking.field_invoice_name
+    - field.field.node.booking.field_itinerary
+    - field.field.node.booking.field_late_finish
+    - field.field.node.booking.field_manned_dj_service
     - field.field.node.booking.field_musician_bass
     - field.field.node.booking.field_musician_dj
     - field.field.node.booking.field_musician_drums
@@ -26,7 +31,10 @@ dependencies:
     - field.field.node.booking.field_musician_sound
     - field.field.node.booking.field_musician_vocals
     - field.field.node.booking.field_pa
+    - field.field.node.booking.field_payment_history
     - field.field.node.booking.field_playlists
+    - field.field.node.booking.field_quote_amount
+    - field.field.node.booking.field_quote_link
     - field.field.node.booking.field_rider
     - field.field.node.booking.field_setup_time
     - field.field.node.booking.field_show
@@ -40,8 +48,8 @@ dependencies:
     - content_moderation
     - cshs
     - datetime
-    - entity_reference_modal
     - field_group
+    - link
     - paragraphs
     - text
     - time_field
@@ -90,6 +98,7 @@ third_party_settings:
     group_venue:
       children:
         - field_venue_name
+        - field_access_instructions
       label: Venue
       region: content
       parent_name: group_booking
@@ -106,6 +115,9 @@ third_party_settings:
     group_invoice:
       children:
         - field_invoice_name
+        - field_quote_link
+        - field_quote_amount
+        - field_payment_history
       label: Invoice
       region: content
       parent_name: group_booking
@@ -126,12 +138,15 @@ third_party_settings:
         - field_event_type
         - field_show_length
         - field_arrival_time
+        - field_early_arrival
         - field_setup_time
         - field_start_time
         - field_finish_time
+        - field_late_finish
         - field_audience_size
         - field_pa
-        - body
+        - field_manned_dj_service
+        - field_itinerary
       label: Show
       region: content
       parent_name: group_booking
@@ -168,7 +183,7 @@ third_party_settings:
       label: Conversation
       region: content
       parent_name: group_booking
-      weight: 23
+      weight: 24
       format_type: tab
       format_settings:
         classes: ''
@@ -223,7 +238,7 @@ third_party_settings:
       label: Playlists
       region: content
       parent_name: group_booking
-      weight: 22
+      weight: 23
       format_type: tab
       format_settings:
         classes: ''
@@ -255,15 +270,13 @@ targetEntityType: node
 bundle: booking
 mode: default
 content:
-  body:
-    type: text_textarea_with_summary
-    weight: 20
+  field_access_instructions:
+    type: text_textarea
+    weight: 44
     region: content
     settings:
-      rows: 9
-      summary_rows: 3
-      placeholder: ''
-      show_summary: false
+      rows: 5
+      placeholder: 'Add any useful information regarding the general location of the venue or the load in, for example is the room on the first floor and accessed via stairs?'
     third_party_settings: {  }
   field_arrival_time:
     type: time_widget
@@ -275,7 +288,7 @@ content:
     third_party_settings: {  }
   field_audience_size:
     type: options_select
-    weight: 18
+    weight: 20
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -292,23 +305,14 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_client_name:
-    type: entity_reference_modal
-    weight: 11
+    type: entity_reference_autocomplete
+    weight: 41
     region: content
     settings:
-      view_and_display: 'contact_lookup:entity_reference_1'
-      add_new_button_title: +
-      modal_form_mode: default
-      modal_width: 60%
-      modal_title: 'Add new'
-      duplicate: false
-      search: true
-      bootstrap: true
-      tagify: false
       match_operator: CONTAINS
-      match_limit: '10'
-      size: '40'
-      placeholder: ''
+      match_limit: 10
+      size: 60
+      placeholder: 'Start typing the name of an existing contact or click on ? above to create a new contact'
     third_party_settings: {  }
   field_conversation:
     type: paragraphs
@@ -317,7 +321,7 @@ content:
     settings:
       title: Paragraph
       title_plural: Paragraphs
-      edit_mode: closed
+      edit_mode: open
       closed_mode: summary
       autocollapse: all
       closed_mode_threshold: 1
@@ -338,9 +342,16 @@ content:
     third_party_settings: {  }
   field_dietary_requirements:
     type: options_buttons
-    weight: 7
+    weight: 40
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_early_arrival:
+    type: boolean_checkbox
+    weight: 15
+    region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   field_enquiry_date:
     type: datetime_default
@@ -362,30 +373,43 @@ content:
     third_party_settings: {  }
   field_finish_time:
     type: time_widget
-    weight: 17
+    weight: 18
     region: content
     settings:
       enabled: false
       step: 5
     third_party_settings: {  }
   field_invoice_name:
-    type: entity_reference_modal
+    type: entity_reference_autocomplete
+    weight: 42
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: 'Start typing the name of an existing contact or click on ? above to create a new contact'
+    third_party_settings: {  }
+  field_itinerary:
+    type: text_textarea
     weight: 23
     region: content
     settings:
-      view_and_display: 'contact_lookup:entity_reference_1'
-      add_new_button_title: +
-      modal_form_mode: default
-      modal_width: 60%
-      modal_title: 'Add new'
-      duplicate: false
-      search: true
-      bootstrap: true
-      tagify: false
-      match_operator: CONTAINS
-      match_limit: '10'
-      size: '40'
-      placeholder: ''
+      rows: 5
+      placeholder: 'Add any details regarding the schedule for the day, for example what are time are guests arriving and when does the band start its first set?'
+    third_party_settings: {  }
+  field_late_finish:
+    type: boolean_checkbox
+    weight: 19
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_manned_dj_service:
+    type: boolean_checkbox
+    weight: 22
+    region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   field_musician_bass:
     type: options_select
@@ -407,7 +431,7 @@ content:
     third_party_settings: {  }
   field_musician_guitar:
     type: options_select
-    weight: 27
+    weight: 26
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -431,13 +455,13 @@ content:
     third_party_settings: {  }
   field_pa:
     type: options_select
-    weight: 19
+    weight: 21
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_playlists:
+  field_payment_history:
     type: paragraphs
-    weight: 6
+    weight: 45
     region: content
     settings:
       title: Paragraph
@@ -453,17 +477,50 @@ content:
         collapse_edit_all: collapse_edit_all
         duplicate: duplicate
     third_party_settings: {  }
+  field_playlists:
+    type: paragraphs
+    weight: 38
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+      features:
+        collapse_edit_all: collapse_edit_all
+        duplicate: duplicate
+    third_party_settings: {  }
+  field_quote_amount:
+    type: number
+    weight: 44
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_quote_link:
+    type: link_default
+    weight: 43
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
   field_rider:
-    type: string_textarea
-    weight: 6
+    type: text_textarea
+    weight: 39
     region: content
     settings:
       rows: 5
-      placeholder: ''
+      placeholder: 'List any agreement with the client regarding a rider.'
     third_party_settings: {  }
   field_setup_time:
     type: time_widget
-    weight: 15
+    weight: 16
     region: content
     settings:
       enabled: false
@@ -508,30 +565,21 @@ content:
     third_party_settings: {  }
   field_start_time:
     type: time_widget
-    weight: 16
+    weight: 17
     region: content
     settings:
       enabled: false
       step: 5
     third_party_settings: {  }
   field_venue_name:
-    type: entity_reference_modal
-    weight: 11
+    type: entity_reference_autocomplete
+    weight: 43
     region: content
     settings:
-      view_and_display: 'contact_lookup:entity_reference_1'
-      add_new_button_title: +
-      modal_form_mode: default
-      modal_width: 60%
-      modal_title: 'Add new'
-      duplicate: false
-      search: true
-      bootstrap: true
-      tagify: false
       match_operator: CONTAINS
-      match_limit: '10'
-      size: '40'
-      placeholder: ''
+      match_limit: 10
+      size: 60
+      placeholder: 'Start typing the name of an existing contact or click on ? above to create a new contact'
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
@@ -558,6 +606,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
 hidden:
+  body: true
   created: true
   field_booking_status: true
   langcode: true

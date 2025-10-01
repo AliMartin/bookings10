@@ -1,16 +1,17 @@
-uuid: 64cca144-c4b3-46fc-beef-5ad79dc41b89
+uuid: 5091954f-8813-444f-bb3e-aa9ae05d47db
 langcode: en-gb
 status: true
 dependencies:
   module:
     - node
-    - text
-id: node.field_rider
-field_name: field_rider
+id: node.field_quote_amount
+field_name: field_quote_amount
 entity_type: node
-type: text_long
-settings: {  }
-module: text
+type: decimal
+settings:
+  precision: 10
+  scale: 2
+module: core
 locked: false
 cardinality: 1
 translatable: true

@@ -15,7 +15,10 @@ label: 'Enquiry date'
 description: 'What is the date of the original enquiry?'
 required: false
 translatable: false
-default_value: {  }
+default_value:
+  -
+    default_date_type: now
+    default_date: now
 default_value_callback: ''
 settings: {  }
 field_type: datetime
